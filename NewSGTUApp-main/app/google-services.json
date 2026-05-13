@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "574536935156",
+    "project_id": "sgtusubscription",
+    "storage_bucket": "sgtusubscription.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574536935156:android:fe27d6705a76aa51dfe0a1",
+        "android_client_info": {
+          "package_name": "com.dev_karan.sikkimglobaltechnicaluniversity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLbA8dicFEmfKFsF4XJBJCzNcZSnKOEDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

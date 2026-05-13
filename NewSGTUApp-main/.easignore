@@ -1,0 +1,47 @@
+# Keep EAS uploads lean by excluding generated/local artifacts.
+
+# Start from common git ignores plus Android build outputs.
+
+# Dependencies and local caches
+
+node_modules/
+.expo/
+
+# Build outputs
+
+android/build/
+android/app/build/
+dist/
+web-build/
+coverage/
+
+# Tooling/IDE
+
+.vscode/
+.idea/
+
+# Logs and temp files
+
+npm-debug._
+yarn-debug._
+yarn-error.\*
+_.log
+_.tmp
+
+# Native signing secrets and keys
+
+_.jks
+_.p8
+_.p12
+_.key
+\*.mobileprovision
+android/keystore.properties
+
+# OS clutter
+
+.DS_Store
+Thumbs.db
+
+# TypeScript incremental cache
+
+\*.tsbuildinfo

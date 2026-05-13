@@ -1,0 +1,26 @@
+const permissionModules = [
+  "Session Management",
+  "Course Type Management",
+  "Course Management",
+  "Student Management",
+  "Result Management",
+  "User Management",
+  "Notification Management",
+  "Bulk Upload",
+  "Count Management",
+  "Video Verification Management",
+  "Certificate Management",
+  "Payment Management",
+  "ID Card Management",
+  "Chat Support",
+  "Student Verification Management",
+  "Character Certificate Management",
+  "Migration Certificate Management",
+  "Course Completion Certificate Management",
+  "Provisional Degree Certificate Management",
+  "Degree Certificate Management",
+  "Transcript Certificate Management",
+  "Duplicate Document Management",
+];
+
+module.exports = { permissionModules };
