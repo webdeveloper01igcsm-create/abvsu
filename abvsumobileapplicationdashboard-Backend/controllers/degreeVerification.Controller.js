@@ -162,7 +162,7 @@ exports.createDegreeVerification = async (req, res) => {
       orderId: rzpOrder.id,
       callbackUrl: redirect_url,
       cancelUrl: cancel_url,
-      name: "SGTU",
+      name: process.env.PAYMENT_BRAND_NAME || "ABVSU",
       description: "Degree Verification",
       customerName: studentName,
       customerEmail: "",

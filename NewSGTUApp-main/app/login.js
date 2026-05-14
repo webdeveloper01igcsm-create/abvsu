@@ -16,6 +16,20 @@ import axios from "axios";
 import Constants from "expo-constants";
 import { fetchStudentSessionState } from "@/lib/studentServicesApi";
 
+const buildAxiosDebugInfo = (error, fallbackUrl) => {
+  const config = error?.config || {};
+  const requestUrl = config?.url || fallbackUrl || "unknown";
+
+  return {
+    code: error?.code || "N/A",
+    message: error?.message || "Unknown axios error",
+    status: error?.response?.status || null,
+    method: String(config?.method || "").toUpperCase() || "UNKNOWN",
+    requestUrl,
+    responseData: error?.response?.data || null,
+  };
+};
+
 const Login = () => {
   const { setUser, url, verifyToken, setToken, setId } = useContext(ApiContext);
   // const [aadharNumber, setaadharNumber] = useState("989898989898");
@@ -71,6 +85,8 @@ const Login = () => {
     }
 
     setLogging(true);
+    const loginUrl = `${url}student/login`;
+
     try {
       const pushToken = await getPushToken();
       const payload = {
@@ -82,7 +98,14 @@ const Login = () => {
         payload.pushToken = pushToken.trim();
       }
 
-      const response = await axios.post(`${url}student/login`, payload);
+      console.log("[api] login request:", {
+        url: loginUrl,
+        enrollmentNumber: normalizedEnrollment,
+      });
+
+      const response = await axios.post(loginUrl, payload, {
+        timeout: 15000,
+      });
       await SecureStore.setItemAsync(
         "token",
         JSON.stringify(response.data.token),
@@ -117,11 +140,13 @@ const Login = () => {
 
       router.replace("/(tabs)/home");
     } catch (error) {
+      const debugInfo = buildAxiosDebugInfo(error, loginUrl);
       const message =
         error?.response?.data?.message ||
         error?.message ||
         "Something went wrong. Please try again.";
       console.log("Login failed:", message);
+      console.log("[api] login debug:", debugInfo);
       if (error.response) {
         Alert.alert("Login Failed", message);
       } else {

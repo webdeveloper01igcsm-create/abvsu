@@ -83,16 +83,16 @@ const developmentOrigins =
   process.env.NODE_ENV === "production"
     ? []
     : [
-      "http://localhost:3000",
-      "http://127.0.0.1:3000",
-      "http://localhost:3001",
-      "http://127.0.0.1:3001",
-      "http://localhost:8081",
-      "https://student.sgtu.ac.in",
-      "https://api.sgtu.ac.in",
-      "https://verification.sgtu.ac.in",
-      "https://admin.sgtu.ac.in",
-    ];
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+        "http://localhost:8081",
+        "https://student.sgtu.ac.in",
+        "https://api.sgtu.ac.in",
+        "https://verification.sgtu.ac.in",
+        "https://admin.sgtu.ac.in",
+      ];
 
 const allowedOrigins = [
   ...new Set([
@@ -200,22 +200,41 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 
-  // cors({
-  //   origin: [
-  //     // "*",
-  //     "http://192.168.1.11:3000",
-  //     "http://localhost:3000",
-  //     "http://localhost:3001",
-  //     "http://127.0.0.1:3000",
-  //     "http://192.168.1.11:3001",
-  //     "exp://192.168.1.11:8081",
-  //     "http://localhost:8081",
-  //   ],
-  //   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  //   credentials: true,
-  //   allowedHeaders: ["Content-Type", "Authorization"],
-  // }),
+  cors({
+    origin: [
+      // "*",
+      "http://192.168.1.35:8081",
+      "http://localhost:8081",
+      "http://localhost:8081",
+      "http://127.0.0.1:8081",
+      "http://192.168.1.35:8081",
+      "exp://192.168.1.11:8081",
+      "http://localhost:8081",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
 );
+
+if (process.env.NODE_ENV !== "production") {
+  app.use((req, res, next) => {
+    if (
+      req.path === "/student/login" ||
+      req.path === "/student/verify" ||
+      req.path === "/student/session-state"
+    ) {
+      console.log("[diag] incoming request", {
+        method: req.method,
+        path: req.path,
+        origin: req.headers.origin || "N/A",
+        host: req.headers.host || "N/A",
+        userAgent: req.headers["user-agent"] || "N/A",
+      });
+    }
+    next();
+  });
+}
 
 const enablePublicUploads =
   String(process.env.ENABLE_PUBLIC_UPLOADS || "")

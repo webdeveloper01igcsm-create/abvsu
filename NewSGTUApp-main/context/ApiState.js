@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ApiContext from "./ApiContext";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
@@ -9,6 +9,20 @@ const normalizeBaseUrl = (value) => {
   return trimmed.endsWith("/") ? trimmed : `${trimmed}/`;
 };
 
+const buildAxiosDebugInfo = (error, fallbackUrl) => {
+  const config = error?.config || {};
+  const requestUrl = config?.url || fallbackUrl || "unknown";
+
+  return {
+    code: error?.code || "N/A",
+    message: error?.message || "Unknown axios error",
+    status: error?.response?.status || null,
+    method: String(config?.method || "").toUpperCase() || "UNKNOWN",
+    requestUrl,
+    responseData: error?.response?.data || null,
+  };
+};
+
 const ApiState = (props) => {
   const url = normalizeBaseUrl(process.env.EXPO_PUBLIC_API_BASE_URL);
   const [user, setUser] = useState("");
@@ -17,10 +31,21 @@ const ApiState = (props) => {
   const [notification, setNotification] = useState([]);
   const [paymentHtml, setPaymentHtml] = useState(null);
 
+  useEffect(() => {
+    console.log("[api] Resolved base URL:", url);
+  }, [url]);
+
   async function verifyToken(oldtken) {
+    const verifyUrl = `${url}student/verify`;
+
     try {
       const cleanToken = String(oldtken || "").replace(/^"|"$/g, "");
-      const response = await axios.get(`${url}student/verify`, {
+      console.log("[api] verifyToken request:", {
+        url: verifyUrl,
+        hasToken: Boolean(cleanToken),
+      });
+
+      const response = await axios.get(verifyUrl, {
         headers: {
           Authorization: `Bearer ${cleanToken}`,
         },
@@ -45,11 +70,13 @@ const ApiState = (props) => {
       setUser(newdata.data.student);
       return true;
     } catch (error) {
+      const debugInfo = buildAxiosDebugInfo(error, verifyUrl);
       const message =
         error?.response?.data?.message ||
         error?.message ||
         "Token verification failed";
       console.log("Error verifying token:", message);
+      console.log("[api] verifyToken debug:", debugInfo);
       return false;
     }
   }

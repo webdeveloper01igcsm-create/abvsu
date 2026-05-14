@@ -30,7 +30,7 @@ const buildRazorpayAutoSubmitHtml = ({
   orderId,
   callbackUrl,
   cancelUrl,
-  name = "SGTU",
+  name = process.env.PAYMENT_BRAND_NAME || "ABVSU",
   description = "Payment",
   customerName = "",
   customerEmail = "",
