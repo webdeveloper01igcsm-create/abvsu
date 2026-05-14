@@ -72,7 +72,7 @@ const SignUp = () => {
   if (isVerifying) {
     return (
       <View className="flex-1 justify-center py-20">
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#0D2B96" />
         <Text className="font-xl mb-20">Verifying...</Text>
       </View>
     );
@@ -83,12 +83,12 @@ const SignUp = () => {
       <View className="h-48 w-48 bg-white rounded-full overflow-hidden justify-center items-center mb-6">
         <Image
           source={require("@/Assets/logo.png")}
-          className="h-full w-10/12 bg-inherit"
+          className="h-full w-11/12 bg-inherit"
           resizeMode="cover"
         />
       </View>
 
-      <Text className="text-indigo-900 font-bold text-2xl mb-4 uppercase">
+      <Text className="text-primary font-bold text-2xl mb-4 uppercase">
         Sign Up
       </Text>
 
@@ -111,7 +111,7 @@ const SignUp = () => {
       </Text>
 
       <TouchableOpacity
-        className="w-4/5 mt-6 flex justify-center items-center bg-orange-500 py-3 px-6 rounded-lg"
+        className="w-4/5 mt-6 flex justify-center items-center bg-primary py-3 px-6 rounded-lg"
         onPress={handleSignUp}
         disabled={isSubmitting}
       >

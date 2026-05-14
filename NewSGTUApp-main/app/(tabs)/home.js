@@ -155,7 +155,7 @@ const StudentPanel = () => {
 
         <View className="w-full px-6 py-2">
           <TouchableOpacity
-            className="bg-indigo-800 rounded-lg p-4"
+            className="bg-secondary rounded-lg p-4"
             onPress={() => router.push("/license-renewal")}
           >
             <Text className="text-white font-bold text-center">

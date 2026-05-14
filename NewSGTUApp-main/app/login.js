@@ -200,7 +200,7 @@ const Login = () => {
   if (isVerifying) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#0D2B96" />
         <Text style={{ fontSize: 18, marginTop: 20 }}>Verifying...</Text>
       </View>
     );
@@ -211,11 +211,11 @@ const Login = () => {
       <View className="h-52 w-52 bg-white rounded-full overflow-hidden justify-center items-center mb-6">
         <Image
           source={require("@/Assets/logo.png")}
-          className="h-full w-10/12 bg-inherit"
+          className="h-full w-11/12 bg-inherit"
           resizeMode="cover"
         />
       </View>
-      <Text className="text-indigo-900 font-bold text-2xl mb-4">Login</Text>
+      <Text className="text-primary font-bold text-2xl mb-4">Login</Text>
       <TextInput
         placeholder="Aadhar Number"
         className="w-4/5 h-14 border border-gray-700 mb-6 px-4 rounded-lg bg-white shadow"
@@ -231,7 +231,7 @@ const Login = () => {
         keyboardType="number-pad"
       />
       <TouchableOpacity
-        className="w-4/5 mt-8 flex justify-center items-center bg-orange-500 py-3 px-6 rounded-lg"
+        className="w-4/5 mt-8 flex justify-center items-center bg-primary py-3 px-6 rounded-lg"
         onPress={handleLogin}
         disabled={logging}
       >
@@ -240,7 +240,7 @@ const Login = () => {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        className="w-4/5 mt-6 flex justify-center items-center bg-indigo-900 py-3 px-6 rounded-lg"
+        className="w-4/5 mt-6 flex justify-center items-center bg-secondary py-3 px-6 rounded-lg"
         onPress={() => router.push("/signup")}
         disabled={logging}
       >

@@ -57,7 +57,7 @@ const Marksheet = () => {
   if (loading) {
     return (
       <View className="flex-1 justify-center items-center bg-gray-100">
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#0D2B96" />
         <Text className="text-lg text-gray-700 mt-4">
           Fetching Marksheet...
         </Text>
@@ -71,7 +71,7 @@ const Marksheet = () => {
         className="flex-1 p-4 bg-gray-100 border-b-8 border-primary"
         style={{ borderTopWidth: 20 }}
       >
-        <Text className="text-2xl font-extrabold text-center mt-4 text-orange-500 underline mb-4">
+        <Text className="text-2xl font-extrabold text-center mt-4 text-primary underline mb-4">
           Marksheet
         </Text>
         {marksheet.length > 0 ? (
@@ -93,7 +93,7 @@ const Marksheet = () => {
                 <Button
                   title="Download"
                   onPress={() => downloadfromapi(item.semesterNumber)}
-                  color="#1d4ed8"
+                  color="#0D2B96"
                 />
               </View>
             )}

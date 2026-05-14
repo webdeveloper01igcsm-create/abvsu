@@ -83,7 +83,7 @@ const ServicesIndex = () => {
           Please complete the required steps to access student services.
         </Text>
         <TouchableOpacity
-          className="bg-indigo-800 rounded px-4 py-3"
+          className="bg-secondary rounded px-4 py-3"
           onPress={() => router.replace("/license-renewal")}
         >
           <Text className="text-white font-semibold">
@@ -146,12 +146,12 @@ const ServicesIndex = () => {
               <Text className="text-white font-semibold">Apply Now</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className="border border-indigo-700 px-4 py-2 rounded-lg"
+              className="border border-primary px-4 py-2 rounded-lg"
               onPress={() =>
                 router.push(`/(tabs)/services/${module.key}/status`)
               }
             >
-              <Text className="text-indigo-700 font-semibold">
+              <Text className="text-primary font-semibold">
                 Check Status
               </Text>
             </TouchableOpacity>

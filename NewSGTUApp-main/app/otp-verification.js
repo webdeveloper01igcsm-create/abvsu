@@ -81,7 +81,7 @@ const OtpVerification = () => {
   if (isVerifying) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#0D2B96" />
         <Text style={{ fontSize: 18, marginTop: 20 }}>Verifying...</Text>
       </View>
     );
@@ -89,7 +89,7 @@ const OtpVerification = () => {
 
   return (
     <View className="flex-1 justify-center items-center bg-gray-100 p-6">
-      <Text className="text-blue-600 font-bold text-2xl mb-4">Enter OTP</Text>
+      <Text className="text-primary font-bold text-2xl mb-4">Enter OTP</Text>
 
       <TextInput
         placeholder="Enter OTP"
@@ -102,7 +102,7 @@ const OtpVerification = () => {
 
       <TouchableOpacity
         className={`w-4/5 mt-6 flex justify-center items-center py-2 px-6 rounded-lg ${
-          loading ? "bg-gray-300" : "bg-orange-400"
+          loading ? "bg-gray-300" : "bg-primary"
         }`}
         onPress={handleOtpSubmit}
         disabled={loading}

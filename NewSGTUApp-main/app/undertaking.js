@@ -122,7 +122,7 @@ const UndertakingScreen = () => {
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator size="large" color="#F15929" />
+        <ActivityIndicator size="large" color="#0D2B96" />
       </View>
     );
   }
@@ -230,7 +230,7 @@ const UndertakingScreen = () => {
       ) : null}
 
       <TouchableOpacity
-        className={`p-3 rounded border mb-3 ${accepted ? "border-primary bg-orange-50" : "border-gray-300"}`}
+        className={`p-3 rounded border mb-3 ${accepted ? "border-primary bg-blue-50" : "border-gray-300"}`}
         onPress={() => setAccepted((prev) => !prev)}
         disabled={!hasScrolledEnd || undertakingLocked}
       >
@@ -260,7 +260,7 @@ const UndertakingScreen = () => {
       ) : null}
 
       <TouchableOpacity
-        className={`rounded p-3 ${undertakingLocked ? "bg-gray-300" : "bg-indigo-800"}`}
+        className={`rounded p-3 ${undertakingLocked ? "bg-gray-300" : "bg-secondary"}`}
         onPress={submitUndertaking}
         disabled={submitting || undertakingLocked}
       >

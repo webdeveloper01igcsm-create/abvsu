@@ -59,7 +59,7 @@ const Index = () => {
   if (isVerifying) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#0D2B96" />
         <Text style={styles.headerText}>Verifying...</Text>
       </View>
     );
@@ -67,7 +67,7 @@ const Index = () => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="#0000ff" />
+      <ActivityIndicator size="large" color="#0D2B96" />
       <Text style={styles.headerText}>Loading...</Text>
     </View>
   );

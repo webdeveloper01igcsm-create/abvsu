@@ -532,7 +532,7 @@ const ServiceApplyScreen = () => {
   if (loading && !profile) {
     return (
       <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator size="large" color="#F15929" />
+        <ActivityIndicator size="large" color="#0D2B96" />
       </View>
     );
   }
@@ -554,7 +554,7 @@ const ServiceApplyScreen = () => {
           Please complete the required steps to access student services.
         </Text>
         <TouchableOpacity
-          className="bg-indigo-800 rounded px-4 py-3"
+          className="bg-secondary rounded px-4 py-3"
           onPress={() => router.replace(nextRoute)}
         >
           <Text className="text-white font-semibold">{buttonLabel}</Text>
@@ -639,7 +639,7 @@ const ServiceApplyScreen = () => {
 
       {requiresEmailOtp && !otpVerified && (
         <TouchableOpacity
-          className="bg-indigo-700 rounded p-3 mb-3"
+          className="bg-secondary rounded p-3 mb-3"
           onPress={handleSendOtp}
           disabled={loadingOtp || !token}
         >
@@ -717,7 +717,7 @@ const ServiceApplyScreen = () => {
           ].map((key) => (
             <TouchableOpacity
               key={key}
-              className={`p-3 rounded border mb-2 ${selectedDocs[key] ? "border-primary bg-orange-50" : "border-gray-300"}`}
+              className={`p-3 rounded border mb-2 ${selectedDocs[key] ? "border-primary bg-blue-50" : "border-gray-300"}`}
               onPress={() =>
                 setSelectedDocs((prev) => ({
                   ...prev,
@@ -1068,7 +1068,7 @@ const ServiceApplyScreen = () => {
       )}
 
       <TouchableOpacity
-        className={`p-3 rounded border mb-3 ${acceptUndertaking ? "border-primary bg-orange-50" : "border-gray-300"}`}
+        className={`p-3 rounded border mb-3 ${acceptUndertaking ? "border-primary bg-blue-50" : "border-gray-300"}`}
         onPress={() => setAcceptUndertaking((prev) => !prev)}
       >
         <Text className="text-gray-800">
@@ -1109,7 +1109,7 @@ const ServiceApplyScreen = () => {
       </View>
 
       <TouchableOpacity
-        className="bg-indigo-800 rounded p-3 mb-3"
+        className="bg-secondary rounded p-3 mb-3"
         onPress={handleSubmit}
         disabled={loading}
       >

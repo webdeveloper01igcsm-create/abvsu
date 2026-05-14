@@ -82,7 +82,7 @@ const Profile = () => {
 
       <View className="bg-gray-50 p-5 rounded-lg shadow-md mb-4">
         <Text className="text-xl font-semibold text-gray-800 mb-3 flex flex-row items-center">
-          <Feather name="user" size={24} color="#F15929" />{" "}
+          <Feather name="user" size={24} color="#0D2B96" />{" "}
           <Text className="ml-2">Profile Information</Text>
         </Text>
         <DetailItem
@@ -105,12 +105,12 @@ const Profile = () => {
         <DetailItem
           label="Mobile Number"
           value={user.mobileNumber}
-          // icon={() => <Feather name="phone" size={18} color="#F15929" />}
+          // icon={() => <Feather name="phone" size={18} color="#0D2B96" />}
         />
         <DetailItem
           label="Email"
           value={user.email}
-          // icon={() => <Feather name="mail" size={18} color="#F15929" />}
+          // icon={() => <Feather name="mail" size={18} color="#0D2B96" />}
         />
         {/* <DetailItem label="Enrollment Number" value={enrollmentNumber} />
         <DetailItem label="Father Name" value={fatherName} />
@@ -120,7 +120,7 @@ const Profile = () => {
 
       {/* <View className="bg-gray-50 p-5 rounded-lg shadow-md mb-4">
         <Text className="text-xl font-semibold text-gray-800 mb-3 flex flex-row items-center">
-          <Feather name="check-circle" size={24} color="#F15929" />{" "}
+          <Feather name="check-circle" size={24} color="#0D2B96" />{" "}
           <Text className="ml-2">Registration & Subscription</Text>
         </Text>
         <DetailItem
@@ -143,7 +143,7 @@ const Profile = () => {
 
       {/* <View className="bg-gray-50 p-5 rounded-lg shadow-md pb-12">
         <Text className="text-xl font-semibold text-gray-800 mb-3 flex flex-row items-center">
-          <Feather name="file-text" size={24} color="#F15929" />{" "}
+          <Feather name="file-text" size={24} color="#0D2B96" />{" "}
           <Text className="ml-2">Uploaded Documents</Text>
         </Text>
         <DetailItem

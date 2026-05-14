@@ -202,7 +202,7 @@ export default function PaymentWebView() {
           If the payment page closes immediately, open it in your browser.
         </Text>
         <TouchableOpacity
-          className="bg-indigo-700 rounded p-2 mt-2"
+          className="bg-secondary rounded p-2 mt-2"
           onPress={openInBrowser}
         >
           <Text className="text-white text-center font-semibold">
@@ -241,12 +241,14 @@ export default function PaymentWebView() {
           // If the error URL carries a payment outcome, honour it before showing fallback UI
           if (!outcomeResolvedRef.current && errorUrl) {
             const intercepted = handleRedirect(errorUrl);
+            routeBySource("?reason=payment_check_pending");
             if (!intercepted) {
               // handleRedirect returned false = it already routed
               return;
             }
           }
           if (!outcomeResolvedRef.current) {
+            routeBySource("?reason=payment_check_pending");
             setLoadError(
               "Payment page was interrupted. If payment is completed, use Check Payment Status.",
             );
@@ -258,10 +260,12 @@ export default function PaymentWebView() {
           if (!outcomeResolvedRef.current && errorUrl) {
             const intercepted = handleRedirect(errorUrl);
             if (!intercepted) {
+              routeBySource("?reason=payment_check_pending");
               return;
             }
           }
           if (!outcomeResolvedRef.current) {
+            routeBySource("?reason=payment_check_pending");
             setLoadError(
               "Payment network response failed. If amount was debited, use Check Payment Status.",
             );

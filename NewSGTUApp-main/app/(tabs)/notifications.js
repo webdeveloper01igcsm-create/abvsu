@@ -48,7 +48,7 @@ const Notifications = () => {
   if (loading) {
     return (
       <View className="flex-1 justify-center items-center bg-gray-100">
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#0D2B96" />
         <Text className="text-gray-600 text-lg mt-2">
           Fetching Notifications...
         </Text>

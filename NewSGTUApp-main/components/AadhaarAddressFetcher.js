@@ -164,7 +164,7 @@ const AadhaarAddressFetcher = ({
     <View className="bg-blue-50 border-2 border-blue-300 rounded-lg p-4 mb-4">
       {/* Header */}
       <View className="mb-4">
-        <Text className="text-indigo-800 font-bold text-lg mb-1">
+        <Text className="text-primary font-bold text-lg mb-1">
           📱 Fetch Address from Aadhaar
         </Text>
         <Text className="text-gray-600 text-sm">
@@ -218,7 +218,7 @@ const AadhaarAddressFetcher = ({
               className={`flex-1 p-3 rounded ${
                 loading || aadhaarNumber.length !== 12
                   ? "bg-gray-300"
-                  : "bg-indigo-800"
+                  : "bg-secondary"
               }`}
             >
               {loading ? (
@@ -289,7 +289,7 @@ const AadhaarAddressFetcher = ({
               onPress={handleVerifyOtp}
               disabled={loading || otp.length !== 6}
               className={`flex-1 p-3 rounded ${
-                loading || otp.length !== 6 ? "bg-gray-300" : "bg-indigo-800"
+                loading || otp.length !== 6 ? "bg-gray-300" : "bg-secondary"
               }`}
             >
               {loading ? (
@@ -424,9 +424,9 @@ const AadhaarAddressFetcher = ({
 
           <TouchableOpacity
             onPress={handleBackToAadhaar}
-            className="border border-indigo-800 p-3 rounded mb-3"
+            className="border border-primary p-3 rounded mb-3"
           >
-            <Text className="text-indigo-800 text-center font-semibold">
+            <Text className="text-primary text-center font-semibold">
               Try Different Aadhaar
             </Text>
           </TouchableOpacity>

@@ -232,7 +232,7 @@ const UploadDocuments = () => {
   if (loading) {
     return (
       <View className="flex-1 justify-center items-center bg-gray-100">
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#0D2B96" />
         <Text className="text-gray-600 text-lg mt-2">Fetching ...</Text>
       </View>
     );
@@ -277,7 +277,7 @@ const UploadDocuments = () => {
               className="flex-row items-center mb-2"
               onPress={() => handleViewPDF(documents.aadhar.uri)}
             >
-              <Ionicons name="document" size={24} color="#F15929" />
+              <Ionicons name="document" size={24} color="#0D2B96" />
               <Text className="ml-2">View Aadhar</Text>
             </TouchableOpacity>
           ) : (
@@ -301,7 +301,7 @@ const UploadDocuments = () => {
               className="flex-row items-center mb-2"
               onPress={() => handleViewPDF(documents.pan.uri)}
             >
-              <Ionicons name="document" size={24} color="#F15929" />
+              <Ionicons name="document" size={24} color="#0D2B96" />
               <Text className="ml-2">View PAN</Text>
             </TouchableOpacity>
           ) : (
@@ -327,7 +327,7 @@ const UploadDocuments = () => {
               className="flex-row items-center mb-2"
               onPress={() => handleViewPDF(documents.secondaryMarksheet.uri)}
             >
-              <Ionicons name="document" size={24} color="#F15929" />
+              <Ionicons name="document" size={24} color="#0D2B96" />
               <Text className="ml-2">View Marksheet</Text>
             </TouchableOpacity>
           ) : (
@@ -353,7 +353,7 @@ const UploadDocuments = () => {
                 handleViewPDF(documents.seniorSecondaryMarksheet.uri)
               }
             >
-              <Ionicons name="document" size={24} color="#F15929" />
+              <Ionicons name="document" size={24} color="#0D2B96" />
               <Text className="ml-2">View Marksheet</Text>
             </TouchableOpacity>
           ) : (
@@ -377,7 +377,7 @@ const UploadDocuments = () => {
               className="flex-row items-center mb-2"
               onPress={() => handleViewPDF(documents.graduationMarksheet.uri)}
             >
-              <Ionicons name="document" size={24} color="#F15929" />
+              <Ionicons name="document" size={24} color="#0D2B96" />
               <Text className="ml-2">View Marksheet</Text>
             </TouchableOpacity>
           ) : (

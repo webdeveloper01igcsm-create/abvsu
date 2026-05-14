@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SGTU Student Application",
-    "slug": "sikkim-global-technical-university",
+    "name": "ABVSU Student Application",
+    "slug": "atal-bihari-vajpayee-skill-university",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./Assets/icon.png",
@@ -23,17 +23,15 @@
         "foregroundImage": "./Assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "WRITE_EXTERNAL_STORAGE",
-        "READ_EXTERNAL_STORAGE"
-      ],
+      "permissions": ["WRITE_EXTERNAL_STORAGE", "READ_EXTERNAL_STORAGE"],
       "package": "com.dev_karan.sikkimglobaltechnicaluniversity",
       "googleServicesFile": "./app/google-services.json"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/logo.png"
+      // "favicon": "./Assets/logo.png"
+      "favicon": "./Assets/icon.png"
     },
     "plugins": [
       "expo-router",
