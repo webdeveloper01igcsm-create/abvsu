@@ -156,9 +156,10 @@ async function run() {
   }
 
   const hasPaymentForm =
-    renewalText.includes("transaction.do?command=initiateTransaction") &&
-    renewalText.includes("encRequest") &&
-    renewalText.includes("access_code");
+    renewalText.includes("https://checkout.razorpay.com/v1/checkout.js") &&
+    renewalText.includes("new Razorpay(options)") &&
+    renewalText.includes("callback_url") &&
+    renewalText.includes("order_id");
 
   log("Renewal form generated", hasPaymentForm);
   if (!hasPaymentForm) {
