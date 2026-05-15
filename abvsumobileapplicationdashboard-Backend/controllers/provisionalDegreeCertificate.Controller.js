@@ -584,32 +584,7 @@ const handleRazorpayResponse = async (req, res) => {
         </html>
       `);
     }
-
-    const paidAmount = payment.amount || params.amount || "";
-    const paymentDate = payment.trans_date
-      ? new Date(payment.trans_date).toLocaleString("en-IN")
-      : new Date().toLocaleString("en-IN");
-
-    return res.status(200).send(`
-      <html>
-        <head>
-          <meta charset="utf-8" />
-          <title>Payment Receipt</title>
-        </head>
-        <body style="font-family: Arial, sans-serif; text-align: center; padding: 40px; color: #1f2937;">
-          <h2 style="font-size: 24px; margin-bottom: 16px;">Payment Successful</h2>
-          <p style="margin-bottom: 8px;">Order ID: ${params.order_id || ""}</p>
-          <p style="margin-bottom: 8px;">Amount Paid: ₹${paidAmount}</p>
-          <p style="margin-bottom: 8px;">Tracking ID: ${payment.tracking_id || "N/A"}</p>
-          <p style="margin-bottom: 8px;">Bank Reference: ${payment.bank_ref_no || "N/A"}</p>
-          <p style="margin-bottom: 16px;">Date: ${paymentDate}</p>
-          <p style="margin-bottom: 20px;">Your payment has been confirmed.</p>
-          <p>
-            <a href="${redirectUrl}" style="background: #1d4ed8; color: #fff; padding: 10px 16px; border-radius: 6px; text-decoration: none;">Open Status Page</a>
-          </p>
-        </body>
-      </html>
-    `);
+    return res.redirect(303, redirectUrl);
   } catch (error) {
     console.error("Error handling payment response:", error);
     return res.status(500).send("Internal Server Error");
@@ -900,3 +875,4 @@ module.exports = {
   retryPayment,
   getPaymentSlip,
 };
+

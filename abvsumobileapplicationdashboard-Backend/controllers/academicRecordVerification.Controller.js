@@ -125,7 +125,7 @@ const getSelectedDocumentCount = (payload) => {
   if (
     String(
       payload.selectedTypes?.provisionalCertificate ||
-        payload.provisionalCertificate,
+      payload.provisionalCertificate,
     ) === "true"
   )
     count += 1;
@@ -138,7 +138,7 @@ const getSelectedDocumentCount = (payload) => {
   if (
     String(
       payload.selectedTypes?.transcriptCertificate ||
-        payload.transcriptCertificate,
+      payload.transcriptCertificate,
     ) === "true"
   )
     count += 1;
@@ -390,51 +390,51 @@ const applyForVerification = async (req, res) => {
     // Build documents object based on mode
     const documentsObject = isMergedMode
       ? {
-          mergedFileUrl: files.mergedDocumentsFile,
-          selectedTypes: {
-            marksheet:
-              String(
-                req.body.selectedTypes?.marksheet || req.body.marksheet,
-              ) === "true",
-            provisionalCertificate:
-              String(
-                req.body.selectedTypes?.provisionalCertificate ||
-                  req.body.provisionalCertificate,
-              ) === "true",
-            degreeCertificate:
-              String(
-                req.body.selectedTypes?.degreeCertificate ||
-                  req.body.degreeCertificate,
-              ) === "true",
-            transcriptCertificate:
-              String(
-                req.body.selectedTypes?.transcriptCertificate ||
-                  req.body.transcriptCertificate,
-              ) === "true",
-          },
-          // Keep legacy fields null for merged mode
-          marksheet: { count: 0, fileUrl: null },
-          provisionalCertificate: null,
-          degreeCertificate: null,
-          transcriptCertificate: null,
-        }
+        mergedFileUrl: files.mergedDocumentsFile,
+        selectedTypes: {
+          marksheet:
+            String(
+              req.body.selectedTypes?.marksheet || req.body.marksheet,
+            ) === "true",
+          provisionalCertificate:
+            String(
+              req.body.selectedTypes?.provisionalCertificate ||
+              req.body.provisionalCertificate,
+            ) === "true",
+          degreeCertificate:
+            String(
+              req.body.selectedTypes?.degreeCertificate ||
+              req.body.degreeCertificate,
+            ) === "true",
+          transcriptCertificate:
+            String(
+              req.body.selectedTypes?.transcriptCertificate ||
+              req.body.transcriptCertificate,
+            ) === "true",
+        },
+        // Keep legacy fields null for merged mode
+        marksheet: { count: 0, fileUrl: null },
+        provisionalCertificate: null,
+        degreeCertificate: null,
+        transcriptCertificate: null,
+      }
       : {
-          mergedFileUrl: null,
-          selectedTypes: {
-            marksheet: false,
-            provisionalCertificate: false,
-            degreeCertificate: false,
-            transcriptCertificate: false,
-          },
-          // Use legacy fields for web/legacy mode
-          marksheet: {
-            count: Number(marksheetCount || 0),
-            fileUrl: files.marksheetFile,
-          },
-          provisionalCertificate: files.provisionalFile,
-          degreeCertificate: files.degreeFile,
-          transcriptCertificate: files.transcriptFile,
-        };
+        mergedFileUrl: null,
+        selectedTypes: {
+          marksheet: false,
+          provisionalCertificate: false,
+          degreeCertificate: false,
+          transcriptCertificate: false,
+        },
+        // Use legacy fields for web/legacy mode
+        marksheet: {
+          count: Number(marksheetCount || 0),
+          fileUrl: files.marksheetFile,
+        },
+        provisionalCertificate: files.provisionalFile,
+        degreeCertificate: files.degreeFile,
+        transcriptCertificate: files.transcriptFile,
+      };
 
     const record = await AcademicRecordVerification.create({
       admission: admission._id,
@@ -582,11 +582,11 @@ const handleRazorpayResponse = async (req, res) => {
     if (isSuccess) {
       redirectUrl = isMobileReturn
         ? `${appBase}?payment=success&orderId=${encodeURIComponent(
-            params.order_id || "",
-          )}`
+          params.order_id || "",
+        )}`
         : `${studentBase}/authenticate/academic-records/status?payment=success&orderId=${encodeURIComponent(
-            params.order_id || "",
-          )}`;
+          params.order_id || "",
+        )}`;
     } else if (isCancelled) {
       redirectUrl = isMobileReturn
         ? `${appBase}?cancelled=true`
@@ -597,11 +597,11 @@ const handleRazorpayResponse = async (req, res) => {
       );
       redirectUrl = isMobileReturn
         ? `${appBase}?payment=failed&orderId=${encodeURIComponent(
-            params.order_id || "",
-          )}&reason=${failureReason}`
+          params.order_id || "",
+        )}&reason=${failureReason}`
         : `${studentBase}/authenticate/academic-records/status?payment=failed&orderId=${encodeURIComponent(
-            params.order_id || "",
-          )}&reason=${failureReason}`;
+          params.order_id || "",
+        )}&reason=${failureReason}`;
     }
 
     if (!isSuccess) {
@@ -635,31 +635,32 @@ const handleRazorpayResponse = async (req, res) => {
       `);
     }
 
-    const paidAmount = payment.amount || params.amount || "";
-    const paymentDate = payment.trans_date
-      ? new Date(payment.trans_date).toLocaleString("en-IN")
-      : new Date().toLocaleString("en-IN");
+    // const paidAmount = payment.amount || params.amount || "";
+    // const paymentDate = payment.trans_date
+    //   ? new Date(payment.trans_date).toLocaleString("en-IN")
+    //   : new Date().toLocaleString("en-IN");
 
-    return res.status(200).send(`
-      <html>
-        <head>
-          <meta charset="utf-8" />
-          <title>Payment Receipt</title>
-        </head>
-        <body style="font-family: Arial, sans-serif; text-align: center; padding: 40px; color: #1f2937;">
-          <h2 style="font-size: 24px; margin-bottom: 16px;">Payment Successful</h2>
-          <p style="margin-bottom: 8px;">Order ID: ${params.order_id || ""}</p>
-          <p style="margin-bottom: 8px;">Amount Paid: ₹${paidAmount}</p>
-          <p style="margin-bottom: 8px;">Tracking ID: ${payment.tracking_id || "N/A"}</p>
-          <p style="margin-bottom: 8px;">Bank Reference: ${payment.bank_ref_no || "N/A"}</p>
-          <p style="margin-bottom: 16px;">Date: ${paymentDate}</p>
-          <p style="margin-bottom: 20px;">Your payment has been confirmed.</p>
-          <p>
-            <a href="${redirectUrl}" style="background: #1d4ed8; color: #fff; padding: 10px 16px; border-radius: 6px; text-decoration: none;">Open Status Page</a>
-          </p>
-        </body>
-      </html>
-    `);
+    // return res.status(200).send(`
+    //   <html>
+    //     <head>
+    //       <meta charset="utf-8" />
+    //       <title>Payment Receipt</title>
+    //     </head>
+    //     <body style="font-family: Arial, sans-serif; text-align: center; padding: 40px; color: #1f2937;">
+    //       <h2 style="font-size: 24px; margin-bottom: 16px;">Payment Successful</h2>
+    //       <p style="margin-bottom: 8px;">Order ID: ${params.order_id || ""}</p>
+    //       <p style="margin-bottom: 8px;">Amount Paid: ₹${paidAmount}</p>
+    //       <p style="margin-bottom: 8px;">Tracking ID: ${payment.tracking_id || "N/A"}</p>
+    //       <p style="margin-bottom: 8px;">Bank Reference: ${payment.bank_ref_no || "N/A"}</p>
+    //       <p style="margin-bottom: 16px;">Date: ${paymentDate}</p>
+    //       <p style="margin-bottom: 20px;">Your payment has been confirmed.</p>
+    //       <p>
+    //         <a href="${redirectUrl}" style="background: #1d4ed8; color: #fff; padding: 10px 16px; border-radius: 6px; text-decoration: none;">Open Status Page</a>
+    //       </p>
+    //     </body>
+    //   </html>
+    // `);
+    return res.redirect(303, redirectUrl);
   } catch (error) {
     console.error("Error handling payment response:", error);
     return res.status(500).send("Internal Server Error");

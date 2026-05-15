@@ -61,6 +61,31 @@ export default function PaymentWebView() {
       nextUrl.includes("payment=failed") ||
       nextUrl.includes("reason=");
 
+    // Skip HTML receipt pages - redirect directly to status page when payment outcome is detected
+    if (nextUrl.includes("razorpay-response") && hasPaymentOutcome) {
+      if (nextUrl.includes("license-renewal")) {
+        outcomeResolvedRef.current = true;
+        router.replace(`/license-renewal${query}`);
+        return false;
+      }
+
+      const servicePath = PAYMENT_REDIRECT_PATHS.find((path) =>
+        nextUrl.includes(path),
+      );
+
+      if (servicePath) {
+        outcomeResolvedRef.current = true;
+        router.replace(`/(tabs)/services/${servicePath}/status${query}`);
+        return false;
+      }
+
+      if (nextUrl.includes("academic-records") || nextUrl.includes("student-verification")) {
+        outcomeResolvedRef.current = true;
+        router.replace(`/(tabs)/services/academic-records/status${query}`);
+        return false;
+      }
+    }
+
     if (hasPaymentOutcome && routeBySource(query)) {
       outcomeResolvedRef.current = true;
       return false;
@@ -113,6 +138,20 @@ export default function PaymentWebView() {
       currentUrl.includes("-response")
     ) {
       return;
+    }
+  };
+
+  const handleWebMessage = (event) => {
+    if (outcomeResolvedRef.current) return;
+    const raw = event?.nativeEvent?.data || "";
+    if (!raw.startsWith("PAYMENT_REDIRECT::")) return;
+
+    const redirectUrl = raw.replace("PAYMENT_REDIRECT::", "").trim();
+    if (!redirectUrl) return;
+
+    const intercepted = handleRedirect(redirectUrl);
+    if (intercepted) {
+      routeBySource("?reason=payment_check_pending");
     }
   };
 
@@ -233,6 +272,26 @@ export default function PaymentWebView() {
         domStorageEnabled={true}
         mixedContentMode="always"
         style={{ flex: 1 }}
+        injectedJavaScript={`
+          (function() {
+            try {
+              var sendRedirect = function () {
+                var links = Array.prototype.slice.call(document.querySelectorAll("a[href]"));
+                var statusLink = links.find(function (link) {
+                  var text = (link.innerText || "").toLowerCase();
+                  return text.includes("open status page") || text.includes("click here if not redirected");
+                });
+                if (!statusLink || !statusLink.href) return;
+                window.ReactNativeWebView && window.ReactNativeWebView.postMessage("PAYMENT_REDIRECT::" + statusLink.href);
+              };
+              setTimeout(sendRedirect, 100);
+              setTimeout(sendRedirect, 700);
+              setTimeout(sendRedirect, 1500);
+            } catch (e) {}
+          })();
+          true;
+        `}
+        onMessage={handleWebMessage}
         onShouldStartLoadWithRequest={(request) => handleRedirect(request?.url)}
         onNavigationStateChange={handleNavigationStateChange}
         onError={(syntheticEvent) => {

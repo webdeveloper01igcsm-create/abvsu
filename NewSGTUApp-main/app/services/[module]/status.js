@@ -89,6 +89,7 @@ const ServiceStatusScreen = () => {
       clearTimeout(refreshTimer);
       clearTimeout(lateRefreshTimer);
     };
+    
   }, [cancelled, loadRecords, payment, reason]);
 
   useEffect(() => {
